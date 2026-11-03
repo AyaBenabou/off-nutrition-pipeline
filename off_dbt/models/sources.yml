@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: off-nutrition-pipeline
+    schema: bronze
+    tables:
+      - name: produits
