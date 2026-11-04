@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: dim_pays
+    columns:
+      - name: pays_id
+        data_tests: [unique, not_null]
+
+  - name: dim_marque
+    columns:
+      - name: marque_id
+        data_tests: [unique, not_null]
+
+  - name: dim_categorie
+    columns:
+      - name: categorie_id
+        data_tests: [unique, not_null]
+
+  - name: dim_produit
+    columns:
+      - name: code
+        data_tests: [unique, not_null]
+
+  - name: fait_produit_pays
+    columns:
+      - name: code
+        data_tests: [not_null]
+      - name: pays_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_pays')
+                field: pays_id
+      - name: marque_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_marque')
+                field: marque_id
+      - name: categorie_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_categorie')
+                field: categorie_id

@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: produits
+    description: "Produits Open Food Facts nettoyés, une ligne par code-barres."
+    columns:
+      - name: code
+        description: "Code-barres du produit."
+        data_tests:
+          - unique
+          - not_null
+      - name: nutriscore_lettre
+        description: "Lettre du Nutri-Score, vide si inconnue."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['a', 'b', 'c', 'd', 'e']
