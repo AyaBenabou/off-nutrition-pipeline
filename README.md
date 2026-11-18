@@ -1,5 +1,7 @@
 # Pipeline de données Open Food Facts : de la donnée brute au Nutri-Score
 
+![dbt parse](https://github.com/AyaBenabou/off-nutrition-pipeline/actions/workflows/dbt-parse.yml/badge.svg) 
+
 Projet personnel de bout en bout sur **4,9 millions de produits alimentaires** : chargement dans BigQuery, nettoyage, modèle en étoile, tests de qualité avec dbt, tableau de bord Power BI et modèle de prédiction du Nutri-Score.
 
 **Question de départ :** quels pays, quelles marques et quelles familles de produits ont les meilleurs Nutri-Score, et peut-on prédire la lettre d'un produit à partir de sa table nutritionnelle ?
@@ -62,6 +64,8 @@ Les problèmes rencontrés, et ce qui a été fait :
 - **Nutri-Score absent** : 70 % des produits n'ont pas de lettre. Les statistiques par lettre portent uniquement sur les produits notés.
 
 **15 tests dbt** vérifient à chaque exécution : unicité des clés, valeurs non nulles, valeurs autorisées pour la lettre (a à e) et relations entre la table de faits et les dimensions. `dbt build` : 6 modèles et 15 tests, tous réussis.
+
+Une vérification automatique (GitHub Actions) lance `dbt parse` à chaque modification du projet dbt, pour détecter toute erreur d'écriture ou de référence entre modèles.
 
 ---
 
