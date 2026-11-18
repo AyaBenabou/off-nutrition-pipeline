@@ -1,0 +1,13 @@
+# Analyse, chargement BigQuery et modèle de prédiction
+pandas==2.3.3
+pyarrow==25.0.1
+db-dtypes==1.9.0
+google-cloud-bigquery==3.47.0
+scikit-learn==1.7.2
+matplotlib==3.10.9
+jupyterlab==4.6.6
+duckdb
+
+# Transformations et tests (dbt)
+dbt-core==1.12.6
+dbt-bigquery==1.12.1
