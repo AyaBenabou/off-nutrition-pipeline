@@ -1,0 +1,41 @@
+name: dbt parse
+
+on:
+  push:
+    paths:
+      - "off_dbt/**"
+      - "requirements.txt"
+      - ".github/workflows/dbt-parse.yml"
+  workflow_dispatch:
+
+jobs:
+  parse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Installer dbt
+        run: pip install dbt-core==1.12.6 dbt-bigquery==1.12.1
+
+      - name: Créer un profil factice (aucune connexion, aucun secret)
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml <<'EOF'
+          off_dbt:
+            target: ci
+            outputs:
+              ci:
+                type: bigquery
+                method: oauth
+                project: off-nutrition-pipeline
+                dataset: ci
+                threads: 1
+          EOF
+
+      - name: Vérifier les modèles et les tests
+        run: dbt parse
+        working-directory: off_dbt
